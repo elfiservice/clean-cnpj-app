@@ -2,3 +2,12 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.out-value-content {
+  background-color: #b9b9b9;
+  border-radius: 5px;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  color: #636363;
+}
