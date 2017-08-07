@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Limpa do CNPJ - Apenas Números</title>
+  <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header clearfix">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active"><a href="#">Home</a></li>
+          <li role="presentation"><a href="#">Sobre</a></li>
+        </ul>
+      </nav>
+      <h3 class="text-muted">Limpa do CNPJ</h3>
+    </div>
+
+    <div class="jumbotron">
+      <h1>Limpe Aqui</h1>
+
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control" id="entryValue" placeholder="Seu CNPJ aqui!">
+        </div>
+      </form>
+      <p><a id="go-btn" class="btn btn-lg btn-success" href="#" role="button">Limpar</a></p>
+
+      <p>
+        <div id="outValue"></div>
+      </p>
+    </div>
+  </div>
+  <script src="js/lib/jquery.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
