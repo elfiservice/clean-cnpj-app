@@ -1,5 +1,7 @@
 $( document ).ready(function() {
 
+
+
     var elemtOutValueContainer = $('#outValueContainer');
     var btnGo = $('#go-btn');
 
@@ -37,12 +39,50 @@ $( document ).ready(function() {
                 }
 
                 view.render(outValue);
+
             });
         },
 
         render: function(outValue){
-            octpus.setCurrentValue(outValue);
-            elemtOutValueContainer.append('<div class="out-value-content">' + octpus.getCurrentValue() + '</div>');
+            if(outValue != ""){
+                octpus.setCurrentValue(outValue);
+                var currentValue = octpus.getCurrentValue();
+                var dataApiResult = "";
+                $.ajax({
+                    url  : 'https://www.receitaws.com.br/v1/cnpj/' + currentValue,
+                    type : "GET",
+                    crossDomain  : "true",
+                    dataType     : "jsonp",
+                    contentType  : "application/json",
+                    success: function( data ){
+                        console.log(data);
+                        dataApiResult = data;
+
+                        if(data.status != "ERROR") {
+                            //alert(data.nome);
+                            elemtOutValueContainer.append('<div class="out-value-content">' +
+                                currentValue +
+                                '<p>' +
+                                data.nome +
+                                '</p><p>' +
+                                data.abertura +
+                                '</p><p>'+
+                                 data.municipio + '-' + data.uf +
+                                '</p><p>' + data.atividade_principal[0].text +
+                                '</p><p>' + data.situacao
+                                +'</p></div>');
+
+                        } else {
+                            elemtOutValueContainer.append('<div class="out-value-content">' + data.message + '</div>');
+                        }
+                    }
+                });
+            } else {
+                elemtOutValueContainer.append('<div class="out-value-content"> Digite um CNPJ! :)</div>');
+            }
+
+
+
         }
     };
 
