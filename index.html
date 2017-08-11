@@ -20,12 +20,12 @@
       <h3 class="text-muted">Limpa do CNPJ</h3>
     </div>
 
-    <div class="jumbotron">
+    <div id="erase" class="jumbotron">
       <h1>Limpe Aqui</h1>
 
-      <form>
+      <form id="formData">
         <div class="form-group">
-          <input type="text" class="form-control" id="entryValue" placeholder="Seu CNPJ aqui!">
+          <input id="cnpj" type="text" class="form-control" id="entryValue" placeholder="Seu CNPJ aqui!">
         </div>
       </form>
       <p><a id="go-btn" class="btn btn-lg btn-success" href="#" role="button">Limpar</a></p>
@@ -36,6 +36,12 @@
     </div>
   </div>
   <script src="js/lib/jquery.js"></script>
-  <script src="js/script.js"></script>
+  <!-- <script src="js/script.js"></script> -->
+  <script src="js/lib/underscore.js"></script>
+<script src="js/lib/backbone.js"></script>
+<script src="js/model/company.js"></script>
+<script src="js/view/erase.js"></script>
+<script src="js/view/result.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
