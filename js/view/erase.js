@@ -7,6 +7,12 @@ app.EraseView = Backbone.View.extend({
     'click #go-btn': 'eraseCnpj'
   },
 
+  initialize: function(){
+
+
+    },
+
+
   eraseCnpj: function( e ) {
     e.preventDefault();
 
@@ -17,18 +23,50 @@ app.EraseView = Backbone.View.extend({
       if( $(el).val() !== ''){
         var outValue =  $(el).val().replace(/[^\d]+/g,'');
           company.set('cnpj', outValue);
+          self.companyDataAPI(company);
       } else {
           company.set('cnpj', 'Digitie um CNPJ :)');
+          self.appendValue(company);
       }
-      self.appendValue(company);
     });
   },
 
-  appendValue: function(value){
+  appendValue: function(company){
     var result = new app.Result({
-      model: value
+      model: company
     });
     result.resetContent();
     this.$el.append(result.render().el);
   },
+
+  companyDataAPI: function(company) {
+    var self = this;
+    var dataApiResult = "";
+    $.ajax({
+        url  : 'https://www.receitaws.com.br/v1/cnpj/' + company.get('cnpj'),
+        type : "GET",
+        crossDomain  : "true",
+        dataType     : "jsonp",
+        contentType  : "application/json",
+        success: function( data ){
+            //console.log(data);
+            dataApiResult = data;
+
+            if(data.status != "ERROR") {
+                company.set({
+                  nome: data.nome,
+                  abertura: data.abertura,
+                  municipio: data.municipio,
+                  uf: data.uf,
+                  atividade_principal: data.atividade_principal[0].text,
+                  situacao: data.situacao
+                });
+
+            } else {
+              company.set('cnpj', data.message);
+            }
+            self.appendValue(company);
+        }
+    });
+  }
 });
