@@ -13,14 +13,14 @@ app.EraseView = Backbone.View.extend({
     var self = this;
 
     $('#formData div').children('input').each(function(i, el){ //take the inputs into the #addBook div
-      if( $(el).val() !== ''){  //if the input is not empty
+      var company = new app.Company();
+      if( $(el).val() !== ''){
         var outValue =  $(el).val().replace(/[^\d]+/g,'');
-        var company = new app.Company({
-          cnpj: outValue
-        });
-
-        self.appendValue(company);
+          company.set('cnpj', outValue);
+      } else {
+          company.set('cnpj', 'Digitie um CNPJ :)');
       }
+      self.appendValue(company);
     });
   },
 
