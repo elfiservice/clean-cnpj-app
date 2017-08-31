@@ -65,8 +65,16 @@ app.EraseView = Backbone.View.extend({
             } else {
               company.set('cnpj', data.message);
             }
+            $("#go-btn").show();
             self.appendValue(company);
+        },
+        beforeSend: function( xhr ) {
+          $("#go-btn").hide();
+          console.log(xhr);
         }
-    });
+    }).fail(function( jqXHR, textStatus ) {
+      $("#go-btn").show();
+  alert( "Request failed: " + textStatus );
+});
   }
 });
