@@ -65,16 +65,21 @@ app.EraseView = Backbone.View.extend({
             } else {
               company.set('cnpj', data.message);
             }
-            $("#go-btn").show();
+            $(".load-gif").hide(300);
+            $("#go-btn").show(300);
             self.appendValue(company);
         },
         beforeSend: function( xhr ) {
-          $("#go-btn").hide();
+          $("#go-btn").hide(300);
+          $(".load-gif").show(300);
           console.log(xhr);
         }
     }).fail(function( jqXHR, textStatus ) {
-      $("#go-btn").show();
-  alert( "Request failed: " + textStatus );
+      $(".load-gif").hide(300);
+      $("#go-btn").show(300);
+      company.set('cnpj', "Opa, tivemos problemas com servidor! :)");
+      self.appendValue(company);
+  //alert( "Request failed: " + textStatus );
 });
   }
 });
