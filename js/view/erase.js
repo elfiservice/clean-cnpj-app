@@ -39,6 +39,16 @@ app.EraseView = Backbone.View.extend({
     this.$el.append(result.render().el);
   },
 
+  hideBtnGo: function() {
+    $("#go-btn").hide(300);
+    $(".load-gif").show(300);
+  },
+
+  showBtnGo: function() {
+    $(".load-gif").hide(300);
+    $("#go-btn").show(300);
+  },
+
   companyDataAPI: function(company) {
     var self = this;
     var dataApiResult = "";
@@ -48,6 +58,9 @@ app.EraseView = Backbone.View.extend({
         crossDomain  : "true",
         dataType     : "jsonp",
         contentType  : "application/json",
+        beforeSend: function( xhr ) {
+          self.hideBtnGo();
+        },
         success: function( data ){
             //console.log(data);
             dataApiResult = data;
@@ -65,18 +78,11 @@ app.EraseView = Backbone.View.extend({
             } else {
               company.set('cnpj', data.message);
             }
-            $(".load-gif").hide(300);
-            $("#go-btn").show(300);
+            self.showBtnGo();
             self.appendValue(company);
-        },
-        beforeSend: function( xhr ) {
-          $("#go-btn").hide(300);
-          $(".load-gif").show(300);
-          console.log(xhr);
         }
     }).fail(function( jqXHR, textStatus ) {
-      $(".load-gif").hide(300);
-      $("#go-btn").show(300);
+      self.showBtnGo();
       company.set('cnpj', "Opa, tivemos problemas com servidor! :)");
       self.appendValue(company);
   //alert( "Request failed: " + textStatus );
