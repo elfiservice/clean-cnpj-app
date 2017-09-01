@@ -8,25 +8,21 @@ app.EraseView = Backbone.View.extend({
   },
 
   initialize: function(){
-
-
-    },
-
+  },
 
   eraseCnpj: function( e ) {
     e.preventDefault();
-
     var self = this;
 
     $('#formData div').children('input').each(function(i, el){ //take the inputs into the #addBook div
       var company = new app.Company();
-      if( $(el).val() !== ''){
+      if( $(el).val() !== '' ){
         var outValue =  $(el).val().replace(/[^\d]+/g,'');
-          company.set('cnpj', outValue);
-          self.companyDataAPI(company);
+        company.set('cnpj', outValue);
+        self.companyDataAPI(company);
       } else {
-          company.set('cnpj', 'Digitie um CNPJ :)');
-          self.appendValue(company);
+        company.set('cnpj', 'Digitie um CNPJ :)');
+        self.appendValue(company);
       }
     });
   },
@@ -62,7 +58,6 @@ app.EraseView = Backbone.View.extend({
           self.hideBtnGo();
         },
         success: function( data ){
-            //console.log(data);
             dataApiResult = data;
 
             if(data.status != "ERROR") {
@@ -74,7 +69,6 @@ app.EraseView = Backbone.View.extend({
                   atividade_principal: data.atividade_principal[0].text,
                   situacao: data.situacao
                 });
-
             } else {
               company.set('cnpj', data.message);
             }
@@ -82,10 +76,9 @@ app.EraseView = Backbone.View.extend({
             self.appendValue(company);
         }
     }).fail(function( jqXHR, textStatus ) {
-      self.showBtnGo();
-      company.set('cnpj', "Opa, tivemos problemas com servidor! :)");
-      self.appendValue(company);
-  //alert( "Request failed: " + textStatus );
-});
+        self.showBtnGo();
+        company.set({nome: "Opa, tivemos problemas com o servidor, não foi possível trazer mais informações deste CNPJ!"});
+        self.appendValue(company);
+      });
   }
 });
