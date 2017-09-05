@@ -59,7 +59,7 @@ app.EraseView = Backbone.View.extend({
         },
         success: function( data ){
             dataApiResult = data;
-
+console.log(data);
             if(data.status != "ERROR") {
                 company.set({
                   nome: data.nome,
@@ -67,12 +67,19 @@ app.EraseView = Backbone.View.extend({
                   municipio: data.municipio,
                   uf: data.uf,
                   atividade_principal: data.atividade_principal[0].text,
-                  situacao: data.situacao
+                  situacao: data.situacao,
+                  cep: data.cep,
+                  logradouro: data.logradouro,
+                  numero: data.numero,
+                  bairro: data.bairro,
+                  complemento: data.complemento,
+                  telefone: data.telefone
                 });
             } else {
               company.set('cnpj', data.message);
             }
             self.showBtnGo();
+            console.log(company);
             self.appendValue(company);
         }
     }).fail(function( jqXHR, textStatus ) {

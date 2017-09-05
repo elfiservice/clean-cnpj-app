@@ -15,7 +15,11 @@ app.Result = Backbone.View.extend({
           '</p><p>'+
            this.model.get('municipio') + '-' + this.model.get('uf') +
           '</p><p>' + this.model.get('atividade_principal') +
-          '</p><p>' + this.model.get('situacao')
+          '</p><p>' + this.model.get('situacao') +
+          '</p><p>' + this.model.get('cep') +
+          '</p><p>' + this.model.get('logradouro') + ', ' + this.model.get('numero') + ' - ' + this.model.get('bairro') +
+          '</p><p>' + this.model.get('complemento') +
+          '</p><p>' + this.model.get('telefone')
           +'</p></div>');
     } else {
       this.$el.append('<div class="out-value-content">' + this.model.get('cnpj') + '</div> ');

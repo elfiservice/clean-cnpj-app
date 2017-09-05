@@ -8,7 +8,13 @@ app.Company = Backbone.Model.extend({
     municipio: '',
     uf: '',
     atividade_principal: '',
-    situacao: ''
+    situacao: '',
+    cep: '',
+    logradouro: '',
+    numero: '',
+    bairro: '',
+    complemento: '',
+    telefone: ''
   }
 
 });
