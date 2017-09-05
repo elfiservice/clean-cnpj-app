@@ -59,7 +59,6 @@ app.EraseView = Backbone.View.extend({
         },
         success: function( data ){
             dataApiResult = data;
-console.log(data);
             if(data.status != "ERROR") {
                 company.set({
                   nome: data.nome,
@@ -79,7 +78,6 @@ console.log(data);
               company.set('cnpj', data.message);
             }
             self.showBtnGo();
-            console.log(company);
             self.appendValue(company);
         }
     }).fail(function( jqXHR, textStatus ) {
