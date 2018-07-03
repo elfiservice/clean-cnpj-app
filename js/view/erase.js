@@ -4,8 +4,9 @@ app.EraseView = Backbone.View.extend({
   el: '#erase',
 
   events: {
-    'click #go-btn': 'eraseCnpj'
-  },
+    'click #go-btn': 'eraseCnpj',
+    'submit #formData': 'eraseCnpj'
+  }, 
 
   initialize: function(){
   },
